@@ -6,12 +6,12 @@
 >
 > 1. 集合点
 > 2. 自定义事务
-> 3. 自定义执行参数封装
+> 3. 自定义参数
 > 4. 压测报告优化
-> 5. 优雅的停止压测的封装
-> 6. 第三方接口调用(该框架已经接入到作者自己开发的测试平台中)
+> 5. 优雅的停止压测
+> 6. 第三方调用(该框架已经接入到作者自己开发的测试平台中)
 > 7. 自动告警(支持邮件\飞书\钉钉群等消息上报)
-> 8. 其他一些小的优化项
+> 8. 一些其他小的优化项
 
 
 
@@ -35,11 +35,6 @@
 
 ```
 
-```bash
-locust -f locustfiles --class-picker
-```
-
-
 
 
 
@@ -53,13 +48,13 @@ locust -f locustfiles --class-picker
 2. 支持使用集合点且自定义集合数`rendezvous_num`
 3. 支持其他业务相关参数通过web/终端传入
 
-调用方式例子如下:
 
 
 
 
 
-1. 在压测文件内定义自定义参数
+
+### 在压测文件内定义自定义参数
 
 ```
 @events.init_command_line_parser.add_listener
@@ -72,7 +67,9 @@ def _(parser):
     parser.add_argument("--rendezvous_num", type=int, env_var="rendezvous_num", default=1, help="集合点的数量")
 ```
 
-2. 如何在压测任务中调用,使用`self.environment.parsed_options.xxxx` 的方式调用
+### 如何在压测任务中调用
+
+使用`self.environment.parsed_options.xxxx` 的方式调用
 
 ```
 class WebsiteUser(HttpUser):
@@ -94,7 +91,7 @@ class WebsiteUser(HttpUser):
 
 
 
-3. 无UI方式调用
+### 无UI方式调用
 
 - make方式执行
 
@@ -120,7 +117,7 @@ locust -f locustfiles/cubelinux/xxxx.py --headless \
 
 
 
-3. UI方式调用
+### UI方式调用
 
 - make方式执行
 
@@ -204,9 +201,9 @@ locust -f locustfiles/cubelinux/xxxx.py --headless \
 
 当压测的量级比较大时,一台开发机或者单线程不能满足需求,就需要多线程多开发机配合了,这方面locust天然支持,就不需要我进行二次封装了,方式如下:
 
-1. 启动master节点
+### 启动master节点
 
-   这一步是必须的,之后让其他的woker节点加入
+这一步是必须的,之后让其他的woker节点加入
 
 ```
 locust -f locustfile.py --master
@@ -214,7 +211,7 @@ locust -f locustfile.py --master
 
 ![image-20250531205049805](./assets/image-20250531205049805.png)
 
-2. woker节点加入
+### woker节点加入
 
 `processes ` 参数代表开启的进程数
 
@@ -318,4 +315,13 @@ class WebsiteUser(HttpUser):
 
 ## locust 使用经验
 
-请查阅我博客的相关章节,里面总结了我工作中各种场景下,使用locust进行压测的一个实践,希望能帮到你
+请查阅作者博客的相关章节,里面总结了我在工作中各种场景下,使用locust进行压测的经验总结,希望能帮到你
+
+
+
+也欢迎和您交流讨论😊
+
+个人微信号
+
+
+<img src="./assets/image-20250531212549739.png" alt="Description" width="300"/>
