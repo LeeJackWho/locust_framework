@@ -2,7 +2,7 @@
 name = "locust-framework"
 version = "0.1.0"
 description = "locust通用测试框架"
-authors = ["ljxpython <1030470148@qq.com>"]
+authors = ["LeeJackWho"]
 license = "MIT"
 readme = "README.md"
 
